@@ -1,0 +1,1168 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title> Validación y Verificación de Aplicaciones Web</title>
+<style>
+  :root{
+    
+    --bg:#ffffff; --card:#bfc9d3; --accent:#0e0bd7; --muted:#030303;
+    --surface:#eef3fb; --success:#19871b; --danger:#dc3545;
+    font-family: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+  }
+  body{background:var(--bg); margin:0; color:#1b2b3a; line-height:1.45}
+  header{background:linear-gradient(90deg,var(--accent),#4a90e2); color:white; padding:28px 20px}
+  header h1{margin:0; font-size:24px}
+  header p{margin:6px 0 0; opacity:.95}
+  main{max-width:1100px; margin:20px auto; padding:0 18px}
+  .card{background:var(--card); border-radius:10px; padding:18px; box-shadow:0 6px 18px rgba(15,30,50,0.06); margin-bottom:18px}
+  h2{color:var(--accent); margin:0 0 8px}
+  h3{margin:12px 0 6px; color:#14324f}
+  p.lead{color:var(--muted); margin-top:0}
+  .resources{display:flex; gap:12px; flex-wrap:wrap}
+  .resource{flex:1 1 280px; background:var(--surface); padding:12px; border-radius:8px}
+  table{width:100%; border-collapse:collapse; margin:8px 0}
+  table th, table td{border:1px solid #e6eef8; padding:8px; text-align:left}
+  .quiz{margin-top:10px}
+  .q{padding:10px; border:1px dashed #e6eef8; border-radius:8px; margin-bottom:10px}
+  label{display:block; margin:6px 0}
+  .btn{display:inline-block; background:var(--accent); color:white; padding:8px 12px; border-radius:8px; text-decoration:none}
+  .btn.secondary{background:#6c757d}
+  .flex{display:flex; gap:10px; flex-wrap:wrap}
+  .svg-diagram{width:100%; max-height:240px; display:block}
+  textarea{width:100%; min-height:90px; padding:8px; border-radius:6px; border:1px solid #dfeaf6}
+  .result{margin-top:8px; padding:10px; border-radius:8px}
+  .result.good{background:rgba(25,135,84,0.08); border:1px solid rgba(25,135,84,0.12); color:var(--success)}
+  .result.bad{background:rgba(220,53,69,0.06); border:1px solid rgba(220,53,69,0.12); color:var(--danger)}
+  footer{margin:30px 0; color:var(--muted); text-align:center}
+  small{color:var(--muted)}
+  .download-link{word-break:break-all}
+
+/* NAVBAR HORIZONTAL */
+.navbar{
+  background: var(--card);
+  box-shadow: 0 4px 14px rgba(0,0,0,.12);
+  padding: 5px 0;
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+}
+
+.navbar ul{
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar li{
+  list-style: none;
+}
+
+.navbar a{
+  text-decoration: none;
+  font-weight: 600;
+  padding: 4px 7px;
+  color: #14324f;
+  border-radius: 8px;
+  transition: .2s;
+}
+
+.navbar a:hover{
+  background: var(--accent);
+  color: white;
+  transform: translateY(-2px);
+}
+ 
+</style>
+</head>
+<section id="inicio" class="card"></section>
+<body>
+<header style="display:flex; justify-content:space-between; align-items:center;">
+  <div>
+  
+    <h1> Validación y Verificación de Aplicaciones Web</h1>
+    <p class="lead">Blog académico – Taller de Ingeniería de Software</p>
+  </div>
+
+  <img src="TecNM_bc.png" alt="Logo de la Universidad" style="height:80px; border-radius:8px;">
+  
+</header>
+<nav class="navbar compact">
+    <ul>
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#t51">5.1 Planificación V&V</a></li>
+      <li><a href="#t52">5.2 Inspección Web</a></li>
+      <li><a href="#t53">5.3 Pruebas Web</a></li>
+      <li><a href="#t54">5.4 Ejemplos</a></li>
+      <li><a href="#t55">5.5 Implementación</a></li>
+      <li><a href="#t56">5.6 Evaluación</a></li>
+      <li><a href="#t57">5.7 Mantenimiento</a></li>
+      <li><a href="#eval-final"><strong>Final</strong></a></li>
+      <li><a href="#fuentes">Bibliografía</a></li>
+    </ul>
+  </nav>
+<main>
+
+  <!-- Intro -->
+  <section class="card">
+    <h2>Introducción</h2>
+    <p class="lead">La verificación y validación (V&V) son procesos fundamentales para garantizar que una aplicación web cumpla con especificaciones técnicas y expectativas del usuario.</p>
+  </section>
+   
+
+  <!-- 5.1 -->
+  <section id="t51" class="card">
+    <h2>5.1 Planificación de la Verificación y Validación (V&V)</h2>
+    <p><strong>Resumen:</strong> La planificación de V&V define cómo se evaluará la calidad de una webapp durante todo su ciclo de vida. Incluye preparación, responsables, herramientas y métricas para garantizar que el producto final cumpla con los estándares y necesidades del usuario.</p>
+
+    <h3>Contenido principal</h3>
+    <ul>
+      <li><strong>Definición:</strong> <em>Verificación</em> revisa artefactos internos (código, documentos). <em>Validación</em> confirma que el sistema cumple lo que el usuario espera.</li>
+    <li>
+      <strong>Objetivo:</strong> La planificación de V&V tiene como finalidad:
+    <ul>
+      <li>Definir qué se evaluará, cómo, cuándo y con qué recursos.</li>
+      <li>Garantizar que el software cumpla requisitos funcionales y no funcionales.</li>
+      <li>Reducir riesgos, defectos, sobrecostos y retrabajos.</li>
+      <li>Establecer estándares que aseguren calidad desde las primeras etapas.</li>
+    </ul>
+    </li>
+
+      <li><strong>Elementos del plan:</strong> 
+        <ul>
+          <li>Responsables</li>
+          <li>Actividades</li>
+          <li>Metricas de calidad</li>
+          </ul>
+        </u>responsables, actividades, entregables, métricas de calidad.</li>
+      <li><strong>Herramientas:</strong> Gantt, Trello, Jira, GitHub Projects, hojas de control.</li>
+      <li><strong>Tip práctico:</strong> define métricas claras (ej. tiempo de carga &lt; 2s, 0 defectos críticos en producción).</li>
+    </ul>
+
+    <div class="resources">
+      <div class="resource">
+        <h4>Diagrama de flujo de planificación</h4>
+        <!-- simple SVG flow -->
+        <svg class="svg-diagram" viewBox="0 0 800 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagrama flujo planificación">
+          <defs><filter id="s" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.08"/></filter></defs>
+          <rect x="40" y="18" rx="10" ry="10" width="160" height="40" fill="#ffffff" stroke="#cfe6ff" filter="url(#s)"/>
+          <text x="120" y="43" font-size="12" text-anchor="middle" fill="#14324f">Inicio</text>
+          <rect x="220" y="18" rx="10" ry="10" width="160" height="40" fill="#ffffff" stroke="#cfe6ff" filter="url(#s)"/>
+          <text x="300" y="43" font-size="12" text-anchor="middle" fill="#14324f">Definir objetivos</text>
+          <rect x="400" y="18" rx="10" ry="10" width="160" height="40" fill="#ffffff" stroke="#cfe6ff" filter="url(#s)"/>
+          <text x="480" y="43" font-size="12" text-anchor="middle" fill="#14324f">Identificar recursos</text>
+          <rect x="580" y="18" rx="10" ry="10" width="160" height="40" fill="#ffffff" stroke="#cfe6ff" filter="url(#s)"/>
+          <text x="660" y="43" font-size="12" text-anchor="middle" fill="#14324f">Crear plan V&V</text>
+
+          <line x1="200" y1="38" x2="220" y2="38" stroke="#a6d0ff" stroke-width="2"/>
+          <line x1="380" y1="38" x2="400" y2="38" stroke="#a6d0ff" stroke-width="2"/>
+          <line x1="560" y1="38" x2="580" y2="38" stroke="#a6d0ff" stroke-width="2"/>
+
+          <rect x="220" y="80" rx="10" ry="10" width="520" height="86" fill="#f8fbff" stroke="#d9eefe"/>
+          <text x="480" y="105" font-size="12" text-anchor="middle" fill="#14324f">Establecer métricas • Asignar responsables • Cronograma • Aprobación</text>
+          <rect x="340" y="178" rx="10" ry="10" width="160" height="30" fill="#ffffff" stroke="#cfe6ff"/>
+          <text x="420" y="197" font-size="12" text-anchor="middle" fill="#14324f">Fin</text>
+        </svg>
+      </div>
+
+      <div class="resource">
+        <h4>Tabla de roles (ejemplo)</h4>
+        <table>
+          <thead><tr><th>Rol</th><th>Actividad</th><th>Entregable</th></tr></thead>
+          <tbody>
+            <tr><td>QA Lead</td><td>Diseñar plan V&V</td><td>Documento V&V</td></tr>
+            <tr><td>Tester</td><td>Crear y ejecutar casos</td><td>Casos de prueba, reportes</td></tr>
+            <tr><td>Dev</td><td>Corregir defectos</td><td>Código corregido</td></tr>
+            <tr><td>PM</td><td>Coordinar y aprobar</td><td>Plan autorizado</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <h3>Quiz 5.1 (selecciona y presiona "Calificar")</h3>
+    <form class="quiz" data-correct='{"q1":"b","q2":"b","q3":"c","q4":"a","q5":"b"}' id="quiz-5-1">
+      <div class="q">
+        <strong>1.</strong> ¿Qué busca la planificación de V&V?<br>
+        <label><input type="radio" name="q1" value="a"> a) Mejorar el diseño visual</label>
+        <label><input type="radio" name="q1" value="b"> b) Asegurar calidad y detectar errores temprano</label>
+        <label><input type="radio" name="q1" value="c"> c) Aumentar ventas</label>
+        <label><input type="radio" name="q1" value="d"> d) Hacer marketing</label>
+      </div>
+
+      <div class="q">
+        <strong>2.</strong> ¿Cuál es un elemento del plan?<br>
+        <label><input type="radio" name="q2" value="a"> a) Paleta de colores</label>
+        <label><input type="radio" name="q2" value="b"> b) Métricas de calidad</label>
+        <label><input type="radio" name="q2" value="c"> c) Tipo de servidor</label>
+        <label><input type="radio" name="q2" value="d"> d) Cantidad de usuarios</label>
+      </div>
+
+      <div class="q">
+        <strong>3.</strong> ¿Qué herramienta puede usarse para planificar?<br>
+        <label><input type="radio" name="q3" value="a"> a) Photoshop</label>
+        <label><input type="radio" name="q3" value="b"> b) Illustrator</label>
+        <label><input type="radio" name="q3" value="c"> c) Jira</label>
+        <label><input type="radio" name="q3" value="d"> d) MySQL</label>
+      </div>
+
+      <div class="q">
+        <strong>4.</strong> La verificación se enfoca en:<br>
+        <label><input type="radio" name="q4" value="a"> a) Artefactos internos del software</label>
+        <label><input type="radio" name="q4" value="b"> b) Opiniones del usuario</label>
+        <label><input type="radio" name="q4" value="c"> c) Marketing</label>
+        <label><input type="radio" name="q4" value="d"> d) Diseño</label>
+      </div>
+
+      <div class="q">
+        <strong>5.</strong> La validación se enfoca en:<br>
+        <label><input type="radio" name="q5" value="a"> a) Código interno</label>
+        <label><input type="radio" name="q5" value="b"> b) Requisitos y expectativas del usuario</label>
+        <label><input type="radio" name="q5" value="c"> c) Hardware</label>
+        <label><input type="radio" name="q5" value="d"> d) Seguridad del servidor</label>
+      </div>
+
+      <div style="display:flex; gap:10px; align-items:center; margin-top:8px">
+        <button type="button" class="btn" onclick="gradeQuiz('quiz-5-1')">Calificar</button>
+        <a class="btn secondary" href="#open-5-1">Responder abiertas / caso</a>
+        <div id="result-quiz-5-1" style="margin-left:auto"></div>
+      </div>
+
+      <div id="open-5-1" style="margin-top:12px">
+        <h4>Preguntas abiertas</h4>
+        <label>1. Explica por qué es importante definir métricas dentro del plan de V&V.<textarea name="open1"></textarea></label>
+        <label>2. ¿Qué riesgos aparecen cuando no existe un plan formal de V&V?<textarea name="open2"></textarea></label>
+
+        <h4>Mini-caso práctico</h4>
+        <p><em>"Una empresa desarrolla una webapp sin plan de V&V. En producción, detectan que el login falla en ciertos navegadores."</em></p>
+        <label>¿Qué parte del plan hubiera evitado este problema?<textarea name="case"></textarea></label>
+      </div>
+    </form>
+  </section>
+
+  <!-- 5.2 -->
+  <section id="t52" class="card">
+    <h2>5.2 Inspección de Software Basado en Web</h2>
+    <p><strong>Resumen:</strong> La inspección es una revisión formal y sistemática para encontrar defectos en artefactos: código, requisitos, diseño o documentación. Se realiza mediante revisiones, walkthroughs o auditorías y se apoya en checklists y herramientas colaborativas.</p>
+
+    <h3>Contenido principal</h3>
+    <ul>
+      <li><strong>¿Qué es una inspección?</strong> Actividad formal para detectar defectos antes de avanzar de etapa.</li>
+      <li><strong>Tipos:</strong>
+          <ul>
+            <li><strong>Revison:</strong>Revisión informal o semiformal del código, interfaz o documentos.</li>
+            <li><strong>Walkthrough:</strong>El autor del software presenta el diseño o código a un grupo para analizarlo y detectar fallos.</li>
+            <li><strong>Auditoria:</strong>Evaluación formal realizada por un tercero, cuyo objetivo es verificar el cumplimiento de estándares, normativas o metodologías.</li>
+          </ul>
+        </li>
+      <li><strong>Checklist típico:</strong> contenido, enlaces, navegación, interfaz, seguridad, estándares.</li>
+      <li><strong>Ejemplo:</strong> Se inspecciona la pgina principal de inicion de sesion de la pagina para encontrar que se valide el correo u otros campos que necesiten validacion.</li>
+      <li><strong>Herramientas:</strong> GitHub Issues, Jira, Trello.</li>
+      
+    </ul>
+
+    <div class="resources">
+      <div class="resource">
+            <h4>Checklist (descargable)</h4>
+            <p>Descarga el checklist ejemplo para inspección:</p>
+            <a 
+              id="download-checklist-inspeccion" 
+              class="btn" 
+              href="Beige & Black Modern To Do Activities Checklist.jpg" 
+              download="Checklist-Inspeccion.png"
+            >
+              Descargar checklist (imagen)
+            </a>
+      </div>
+
+      <div class="resource">
+        <h4>Flujo de inspección (visual)</h4>
+        <svg class="svg-diagram" viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" aria-label="Flujo inspección">
+          <rect x="20" y="18" rx="8" ry="8" width="140" height="30" fill="#fff" stroke="#cfe6ff"/><text x="90" y="38" text-anchor="middle" font-size="12" fill="#14324f">Preparación</text>
+          <rect x="180" y="18" rx="8" ry="8" width="140" height="30" fill="#fff" stroke="#cfe6ff"/><text x="250" y="38" text-anchor="middle" font-size="12" fill="#14324f">Revisión individual</text>
+          <rect x="340" y="18" rx="8" ry="8" width="140" height="30" fill="#fff" stroke="#cfe6ff"/><text x="410" y="38" text-anchor="middle" font-size="12" fill="#14324f">Reunión de inspección</text>
+          <rect x="500" y="18" rx="8" ry="8" width="140" height="30" fill="#fff" stroke="#cfe6ff"/><text x="570" y="38" text-anchor="middle" font-size="12" fill="#14324f">Registro y cierre</text>
+          <line x1="160" y1="33" x2="180" y2="33" stroke="#a6d0ff" stroke-width="2"/>
+          <line x1="320" y1="33" x2="340" y2="33" stroke="#a6d0ff" stroke-width="2"/>
+          <line x1="480" y1="33" x2="500" y2="33" stroke="#a6d0ff" stroke-width="2"/>
+        </svg>
+      </div>
+    </div>
+
+    <h3>Quiz 5.2</h3>
+    <form class="quiz" data-correct='{"q1":"c","q2":"b","q3":"b","q4":"c","q5":"b"}' id="quiz-5-2">
+      <div class="q"><strong>1.</strong> ¿Qué es una inspección?<br>
+        <label><input type="radio" name="q1" value="a"> a) Una prueba automática</label>
+        <label><input type="radio" name="q1" value="b"> b) Un proceso de diseño</label>
+        <label><input type="radio" name="q1" value="c"> c) Una revisión formal para encontrar defectos</label>
+        <label><input type="radio" name="q1" value="d"> d) Un método de despliegue</label>
+      </div>
+
+      <div class="q"><strong>2.</strong> ¿Qué tipo de inspección consiste en revisar paso a paso?<br>
+        <label><input type="radio" name="q2" value="a"> a) Auditoría</label>
+        <label><input type="radio" name="q2" value="b"> b) Walkthrough</label>
+        <label><input type="radio" name="q2" value="c"> c) Validación</label>
+        <label><input type="radio" name="q2" value="d"> d) Reporte</label>
+      </div>
+
+      <div class="q"><strong>3.</strong> ¿Qué herramienta se usa para inspecciones?<br>
+        <label><input type="radio" name="q3" value="a"> a) Illustrator</label>
+        <label><input type="radio" name="q3" value="b"> b) GitHub Issues</label>
+        <label><input type="radio" name="q3" value="c"> c) WordPress</label>
+        <label><input type="radio" name="q3" value="d"> d) Nginx</label>
+      </div>
+
+      <div class="q"><strong>4.</strong> ¿Para qué sirve un checklist?<br>
+        <label><input type="radio" name="q4" value="a"> a) Cambiar colores</label>
+        <label><input type="radio" name="q4" value="b"> b) Acelerar hosting</label>
+        <label><input type="radio" name="q4" value="c"> c) Guiar la revisión y no olvidar puntos clave</label>
+        <label><input type="radio" name="q4" value="d"> d) Crear diagramas</label>
+      </div>
+
+      <div class="q"><strong>5.</strong> El moderador en una inspección:<br>
+        <label><input type="radio" name="q5" value="a"> a) Escribe el código</label>
+        <label><input type="radio" name="q5" value="b"> b) Dirige la reunión</label>
+        <label><input type="radio" name="q5" value="c"> c) Diseña interfaces</label>
+        <label><input type="radio" name="q5" value="d"> d) Prueba la base de datos</label>
+      </div>
+
+      <div style="display:flex; gap:10px; align-items:center">
+        <button type="button" class="btn" onclick="gradeQuiz('quiz-5-2')">Calificar</button>
+        <a class="btn secondary" href="#open-5-2">Responder abiertas / caso</a>
+        <div id="result-quiz-5-2" style="margin-left:auto"></div>
+      </div>
+
+      <div id="open-5-2" style="margin-top:12px">
+        <h4>Preguntas abiertas</h4>
+        <label>1. ¿Por qué las inspecciones reducen costos en desarrollo?<textarea name="open1"></textarea></label>
+        <label>2. ¿Qué diferencia hay entre revisión y auditoría?<textarea name="open2"></textarea></label>
+
+        <h4>Mini-caso</h4>
+        <p><em>"Durante una inspección descubren que varios formularios no tienen validación."</em></p>
+        <label>¿Qué tipo de defectos se están identificando?<textarea name="case"></textarea></label>
+      </div>
+    </form>
+  </section>
+
+  <!-- 5.3 -->
+  <section id="t53" class="card">
+    <h2>5.3 Pruebas de Aplicaciones Web</h2>
+    <p><strong>Resumen:</strong> Las pruebas permiten identificar errores en funcionalidad, seguridad, desempeño, usabilidad y compatibilidad. Requieren planificación y generación de evidencias (capturas, logs, reportes).</p>
+
+    <h3>Contenido principal</h3>
+    <ul>
+      <li><strong>Definición:</strong> ejecución controlada de la webapp para encontrar errores.</li>
+      <li><strong>Tipos:</strong></li>
+        <ul>
+          <li><strong>Pruebas Funcionales:</strong></li>
+          <ul>
+          <li>Probar el inicio de sesión con combinaciones válidas e inválidas</li>
+          <li>Verificar que los enlaces y botones ejecuten la acción correcta.</li>
+          <li>Validar que los formularios envíen y reciban datos apropiadamente.</li>
+          </ul>
+          <li><strong>Pruebas No Funcionales:</strong></li>
+          <ul>
+          <li>Medir tiempo de carga de la página principal.</li>
+          <li>Revisar el uso de CPU/RAM en el navegador.</li>
+          <li>Verificar estabilidad bajo múltiples solicitudes simultáneas.</li>
+          </ul>
+          <li><strong>Pruebas de Funcionalidad:</strong></li>
+          <ul>
+          <li>Comprobar que un usuario pueda completar una tarea sin instrucciones.</li>
+          <li>Evaluar claridad de textos, colores, botones y mensajes.</li>
+          <li>Probar accesibilidad con teclado y lectores de pantalla.</li>
+          </ul>
+          <li><strong>Pruebas de Seguridad:</strong></li>
+          <ul>
+          <li>Intentar inyección SQL en formularios.</li>
+          <li>Verificar protección contra XSS reflejado y almacenado.</li>
+          <li>Comprobar uso de HTTPS y políticas de seguridad (CSP).</li>
+          </ul>
+          <li><strong>Pruebas de Compatibilidad:</strong></li>
+          <ul>
+          <li>Probar interfaz en varios navegadores y tamaños de pantalla.</li>
+          <li>Revisar comportamiento del diseño responsive.</li>
+          </ul>
+          
+        </ul>
+      <li><strong>Plan de pruebas:</strong> casos, datos, responsables, ambiente.</li>
+      <li><strong>Evidencias:</strong> capturas, reportes, logs, videos. Guardarlas da trazabilidad.</li>
+    </ul>
+
+    <div class="resources">
+      <div class="resource">
+        <h4>Tabla comparativa de pruebas</h4>
+        <table>
+          <thead><tr><th>Tipo</th><th>¿Qué evalúa?</th></tr></thead>
+          <tbody>
+            <tr><td>Funcionales</td><td>Reglas y funciones (login, registro)</td></tr>
+            <tr><td>No funcionales</td><td>Rendimiento, escalabilidad</td></tr>
+            <tr><td>Seguridad</td><td>Vulnerabilidades (SQLi, XSS)</td></tr>
+            <tr><td>Usabilidad</td><td>Accesibilidad, experiencia</td></tr>
+            <tr><td>Compatibilidad</td><td>Navegadores y dispositivos</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+          <div class="resource">
+          <h4>Captura de prueba (ejemplo)</h4>
+          <div style="background:#fff;border-radius:8px;padding:10px;border:1px solid #e6eef8">
+            <strong>Ejemplo:</strong> Mensaje de error al ingresar correo inválido.
+
+            <div style="margin-top:10px; background:#f8fbff; border-radius:6px; padding:10px; text-align:center;">
+              <img 
+                src="Captura de pantalla 2025-12-02 180918.png" 
+                alt="Captura de error: correo inválido"
+                style="max-width:100%; border-radius:6px;"
+              >
+            </div>
+
+          </div>
+        </div>
+    </div>
+
+    <h3>Quiz 5.3</h3>
+    <form class="quiz" data-correct='{"q1":"c","q2":"b","q3":"b","q4":"a","q5":"c"}' id="quiz-5-3">
+      <div class="q"><strong>1.</strong> ¿Qué son las pruebas web?<br>
+        <label><input type="radio" name="q1" value="a"> a) Diseños</label>
+        <label><input type="radio" name="q1" value="b"> b) Auditorías</label>
+        <label><input type="radio" name="q1" value="c"> c) Ejecuciones controladas para buscar errores</label>
+        <label><input type="radio" name="q1" value="d"> d) Migraciones</label>
+      </div>
+
+      <div class="q"><strong>2.</strong> ¿Qué prueba detecta lentitud?<br>
+        <label><input type="radio" name="q2" value="a"> a) Funcional</label>
+        <label><input type="radio" name="q2" value="b"> b) Rendimiento</label>
+        <label><input type="radio" name="q2" value="c"> c) Walkthrough</label>
+        <label><input type="radio" name="q2" value="d"> d) Exploratoria</label>
+      </div>
+
+      <div class="q"><strong>3.</strong> ¿Qué prueba revisa accesibilidad?<br>
+        <label><input type="radio" name="q3" value="a"> a) Estilo</label>
+        <label><input type="radio" name="q3" value="b"> b) Usabilidad</label>
+        <label><input type="radio" name="q3" value="c"> c) Base de datos</label>
+        <label><input type="radio" name="q3" value="d"> d) Hardware</label>
+      </div>
+
+      <div class="q"><strong>4.</strong> ¿Qué incluye el plan de pruebas?<br>
+        <label><input type="radio" name="q4" value="a"> a) Casos, datos, responsables</label>
+        <label><input type="radio" name="q4" value="b"> b) Precio de servidores</label>
+        <label><input type="radio" name="q4" value="c"> c) Logo de la empresa</label>
+        <label><input type="radio" name="q4" value="d"> d) Diagramas UML</label>
+      </div>
+
+      <div class="q"><strong>5.</strong> La compatibilidad revisa:<br>
+        <label><input type="radio" name="q5" value="a"> a) Nivel de PHP</label>
+        <label><input type="radio" name="q5" value="b"> b) Cantidad de usuarios</label>
+        <label><input type="radio" name="q5" value="c"> c) Funcionamiento en diferentes navegadores</label>
+        <label><input type="radio" name="q5" value="d"> d) Licencias del software</label>
+      </div>
+
+      <div style="display:flex; gap:10px; align-items:center">
+        <button type="button" class="btn" onclick="gradeQuiz('quiz-5-3')">Calificar</button>
+        <a class="btn secondary" href="#open-5-3">Responder abiertas / caso</a>
+        <div id="result-quiz-5-3" style="margin-left:auto"></div>
+      </div>
+
+      <div id="open-5-3" style="margin-top:12px">
+        <h4>Preguntas abiertas</h4>
+        <label>1. Explica por qué se deben guardar evidencias de prueba.<textarea name="open1"></textarea></label>
+        <label>2. ¿Qué relación hay entre pruebas de seguridad y validación?<textarea name="open2"></textarea></label>
+
+        <h4>Mini-caso</h4>
+        <p><em>"Un sitio funciona en Chrome pero falla en Safari."</em></p>
+        <label>¿Qué tipo de prueba faltó?<textarea name="case"></textarea></label>
+      </div>
+    </form>
+  </section>
+
+  <!-- 5.4 -->
+  <section id="t54" class="card">
+    <h2>5.4 Ejemplos de Pruebas para Webapps</h2>
+    <p><strong>Resumen:</strong> Casos prácticos (formulario, login, carrito) con datos, resultado esperado y evidencia. Sirven para práctica en laboratorio o como plantillas para pruebas reales.</p>
+
+    <h3>Ejemplos (detallados)</h3>
+    <ol>
+      <li><strong>Formulario de registro</strong>
+        <ul>
+          <li><strong>Caso:</strong> verificar campos obligatorios</li>
+          <li><strong>Datos:</strong> nombre vacío, correo inválido</li>
+          <li><strong>Resultado esperado:</strong> mensajes de validación</li>
+          <li><strong>Evidencia:</strong> pantalla de error</li>
+        </ul>
+      </li>
+      <li><strong>Login de usuario</strong>
+        <ul>
+          <li><strong>Caso:</strong> login correcto / incorrecto</li>
+          <li><strong>Datos:</strong> usuario válido / usuario no registrado</li>
+          <li><strong>Resultado esperado:</strong> acceso o alerta</li>
+          <li><strong>Evidencia:</strong> captura de dashboard o error</li>
+        </ul>
+      </li>
+      <li><strong>Carrito de compras</strong>
+        <ul>
+          <li><strong>Caso:</strong> agregar productos y actualizar total</li>
+          <li><strong>Datos:</strong> cantidades 1–5</li>
+          <li><strong>Resultado esperado:</strong> cambio correcto en el total</li>
+          <li><strong>Evidencia:</strong> imagen del carrito</li>
+        </ul>
+      </li>
+    </ol>
+
+    <div class="resources">
+      <div class="resource">
+            <h4>Casos (descargable)</h4>
+            <p>Descarga los casos de prueba:</p>
+            <a 
+              id="download-caso de prueba" 
+              class="btn" 
+              href="Cartel Póster Consejos Bienestar y Salud Ilustrativo Blanco.png" 
+              download="Casos de prueba.png"
+            >
+              Descargar casos de prueba (imagen)
+            </a>
+      </div>
+
+     <div class="resource">
+          <h4>Imagenes de la APP (ejemplo)</h4>
+          <div style="background:#fff;border-radius:8px;padding:10px;border:1px solid #e6eef8">
+            <strong>Ejemplo:</strong>app utilizada.
+
+            <div style="margin-top:10px; background:#f8fbff; border-radius:6px; padding:10px; text-align:center;">
+              <img 
+                src="fc.png" 
+                alt="Captura de error: correo inválido"
+                style="max-width:100%; border-radius:6px;"
+              >
+            </div>
+
+          </div>
+        </div>
+    </div>
+
+    <h3>Quiz 5.4</h3>
+    <form class="quiz" data-correct='{"q1":"c","q2":"a","q3":"b","q4":"b","q5":"b"}' id="quiz-5-4">
+      <div class="q"><strong>1.</strong> Un caso de prueba incluye:<br>
+        <label><input type="radio" name="q1" value="a"> a) Hosting</label>
+        <label><input type="radio" name="q1" value="b"> b) Tiempo de carga</label>
+        <label><input type="radio" name="q1" value="c"> c) Entrada y resultado esperado</label>
+        <label><input type="radio" name="q1" value="d"> d) Costo del servidor</label>
+      </div>
+
+      <div class="q"><strong>2.</strong> ¿Qué evidencia se usa?<br>
+        <label><input type="radio" name="q2" value="a"> a) Capturas de pantalla</label>
+        <label><input type="radio" name="q2" value="b"> b) Videos musicales</label>
+        <label><input type="radio" name="q2" value="c"> c) Logos</label>
+        <label><input type="radio" name="q2" value="d"> d) Plantillas</label>
+      </div>
+
+      <div class="q"><strong>3.</strong> ¿Qué prueba aplica al carrito de compras?<br>
+        <label><input type="radio" name="q3" value="a"> a) Auditoría</label>
+        <label><input type="radio" name="q3" value="b"> b) Cálculo de total</label>
+        <label><input type="radio" name="q3" value="c"> c) Seguridad</label>
+        <label><input type="radio" name="q3" value="d"> d) Instalación</label>
+      </div>
+
+      <div class="q"><strong>4.</strong> ¿Qué se evalúa en un formulario?<br>
+        <label><input type="radio" name="q4" value="a"> a) Tamaño del servidor</label>
+        <label><input type="radio" name="q4" value="b"> b) Validación y campos obligatorios</label>
+        <label><input type="radio" name="q4" value="c"> c) Precio del dominio</label>
+        <label><input type="radio" name="q4" value="d"> d) SEO</label>
+      </div>
+
+      <div class="q"><strong>5.</strong> ¿Qué caso es válido?<br>
+        <label><input type="radio" name="q5" value="a"> a) Cambiar tema de color</label>
+        <label><input type="radio" name="q5" value="b"> b) Iniciar sesión con usuario válido</label>
+        <label><input type="radio" name="q5" value="c"> c) Redactar un manual</label>
+        <label><input type="radio" name="q5" value="d"> d) Crear BD</label>
+      </div>
+
+      <div style="display:flex; gap:10px; align-items:center">
+        <button type="button" class="btn" onclick="gradeQuiz('quiz-5-4')">Calificar</button>
+        <a class="btn secondary" href="#open-5-4">Responder abiertas / caso</a>
+        <div id="result-quiz-5-4" style="margin-left:auto"></div>
+      </div>
+
+      <div id="open-5-4" style="margin-top:12px">
+        <h4>Preguntas abiertas</h4>
+        <label>1. ¿Por qué un caso de prueba debe ser repetible?<textarea name="open1"></textarea></label>
+        <label>2. ¿Qué diferencia hay entre ejemplo real y simulado?<textarea name="open2"></textarea></label>
+
+        <h4>Mini-caso</h4>
+        <p><em>"El carrito muestra subtotal, pero no aplica descuentos."</em></p>
+        <label>¿Qué caso de prueba debe agregarse?<textarea name="case"></textarea></label>
+      </div>
+    </form>
+  </section>
+
+  <!-- 5.5 -->
+  <section id="t55" class="card">
+    <h2>5.5 Implementación de Aplicaciones Web</h2>
+    <p><strong>Resumen:</strong> La implementación transforma diseños y requisitos en código. Incluye control de versiones, CI/CD y buenas prácticas; está estrechamente ligada a la V&V porque cada entrega debe ser verificable.</p>
+
+    <h3>Contenido principal</h3>
+    <ul>
+      <li>Relación implementación–V&V: cada módulo debe ser probado antes de integrarse.</li>
+      <li>Control de versiones: Git, ramas, commits, pull requests.</li>
+      <li>CI/CD: Jenkins, GitHub Actions, GitLab CI.</li>
+      <li>Buenas prácticas: modularidad, documentación, pruebas unitarias.</li>
+      <li>Errores comunes: mala gestión de versiones, falta de pruebas, dependencias rotas.</li>
+    </ul>
+
+    <div class="resources">
+      <div class="resource">
+        <h4>Diagrama CI/CD</h4>
+        <svg class="svg-diagram" viewBox="0 0 800 160" xmlns="http://www.w3.org/2000/svg" aria-label="Diagrama CI/CD">
+          <rect x="20" y="18" rx="8" ry="8" width="140" height="36" fill="#fff" stroke="#cfe6ff"/><text x="90" y="40" text-anchor="middle" font-size="12" fill="#14324f">Commit</text>
+          <rect x="190" y="18" rx="8" ry="8" width="140" height="36" fill="#fff" stroke="#cfe6ff"/><text x="260" y="40" text-anchor="middle" font-size="12" fill="#14324f">Build</text>
+          <rect x="360" y="18" rx="8" ry="8" width="140" height="36" fill="#fff" stroke="#cfe6ff"/><text x="430" y="40" text-anchor="middle" font-size="12" fill="#14324f">Tests</text>
+          <rect x="530" y="18" rx="8" ry="8" width="140" height="36" fill="#fff" stroke="#cfe6ff"/><text x="600" y="40" text-anchor="middle" font-size="12" fill="#14324f">Deploy</text>
+          <line x1="160" y1="36" x2="190" y2="36" stroke="#a6d0ff" stroke-width="2"/>
+          <line x1="330" y1="36" x2="360" y2="36" stroke="#a6d0ff" stroke-width="2"/>
+          <line x1="500" y1="36" x2="530" y2="36" stroke="#a6d0ff" stroke-width="2"/>
+        </svg>
+      </div>
+
+      <div class="resource">
+        <h4>Ejemplo de commit</h4>
+        <pre style="background:#f8fbff;padding:8px;border-radius:6px;border:1px solid #e6eef8">feat: agregado módulo de validación en registro</pre>
+      </div>
+    </div>
+
+    <h3>Quiz 5.5</h3>
+    <form class="quiz" data-correct='{"q1":"b","q2":"b","q3":"b","q4":"b","q5":"c"}' id="quiz-5-5">
+      <div class="q"><strong>1.</strong> ¿Qué se usa para control de versiones?<br>
+        <label><input type="radio" name="q1" value="a"> a) Excel</label>
+        <label><input type="radio" name="q1" value="b"> b) Git</label>
+        <label><input type="radio" name="q1" value="c"> c) PowerPoint</label>
+        <label><input type="radio" name="q1" value="d"> d) Photoshop</label>
+      </div>
+
+      <div class="q"><strong>2.</strong> CI/CD significa:<br>
+        <label><input type="radio" name="q2" value="a"> a) Construcción instantánea</label>
+        <label><input type="radio" name="q2" value="b"> b) Integración y entrega continua</label>
+        <label><input type="radio" name="q2" value="c"> c) Diseño creativo</label>
+        <label><input type="radio" name="q2" value="d"> d) Desarrollo en cascada</label>
+      </div>
+
+      <div class="q"><strong>3.</strong> ¿Qué evita errores comunes?<br>
+        <label><input type="radio" name="q3" value="a"> a) Hosting caro</label>
+        <label><input type="radio" name="q3" value="b"> b) Buenas prácticas y pruebas unitarias</label>
+        <label><input type="radio" name="q3" value="c"> c) Marketing</label>
+        <label><input type="radio" name="q3" value="d"> d) SEO</label>
+      </div>
+
+      <div class="q"><strong>4.</strong> ¿Qué incluye la implementación?<br>
+        <label><input type="radio" name="q4" value="a"> a) Solo diseño</label>
+        <label><input type="radio" name="q4" value="b"> b) Código, pruebas, repositorio</label>
+        <label><input type="radio" name="q4" value="c"> c) Facturación</label>
+        <label><input type="radio" name="q4" value="d"> d) Ventas</label>
+      </div>
+
+      <div class="q"><strong>5.</strong> ¿Qué es un commit?<br>
+        <label><input type="radio" name="q5" value="a"> a) Un documento</label>
+        <label><input type="radio" name="q5" value="b"> b) Una carpeta</label>
+        <label><input type="radio" name="q5" value="c"> c) Un registro de cambio en el código</label>
+        <label><input type="radio" name="q5" value="d"> d) Un reporte financiero</label>
+      </div>
+
+      <div style="display:flex; gap:10px; align-items:center">
+        <button type="button" class="btn" onclick="gradeQuiz('quiz-5-5')">Calificar</button>
+        <a class="btn secondary" href="#open-5-5">Responder abiertas / caso</a>
+        <div id="result-quiz-5-5" style="margin-left:auto"></div>
+      </div>
+
+      <div id="open-5-5" style="margin-top:12px">
+        <h4>Preguntas abiertas</h4>
+        <label>1. ¿Por qué es importante versionar el código?<textarea name="open1"></textarea></label>
+        <label>2. ¿Cómo ayuda CI/CD a la calidad del software?<textarea name="open2"></textarea></label>
+
+        <h4>Mini-caso</h4>
+        <p><em>"Un desarrollador subió código sin pruebas y rompió la app."</em></p>
+        <label>¿Qué parte del proceso falló?<textarea name="case"></textarea></label>
+      </div>
+    </form>
+  </section>
+
+  <!-- 5.6 -->
+  <section id="t56" class="card">
+    <h2>5.6 Evaluación de Aplicaciones Web</h2>
+    <p><strong>Resumen:</strong> La evaluación revisa rendimiento, seguridad, accesibilidad, SEO y compatibilidad. Se usan heurísticas y matrices con puntajes para tomar decisiones de mejora.</p>
+
+    <h3>Contenido principal</h3>
+    <ul>
+      <li>Evaluación integral: funcionalidad, estructura, experiencia del usuario.</li>
+      <li>Heurísticas: Nielsen, diseño responsive, WCAG.</li>
+      <li>Criterios técnicos: rendimiento, seguridad, SEO, tiempos de carga.</li>
+      <li>Matriz de evaluación con puntajes para priorizar mejoras.</li>
+    </ul>
+
+    <div class="resources">
+      <div class="resource">
+        <h4>Matriz de evaluación (ejemplo)</h4>
+        <table>
+          <thead><tr><th>Criterio</th><th>Peso</th><th>Puntaje (1-5)</th></tr></thead>
+          <tbody>
+            <tr><td>Rendimiento</td><td>25%</td><td>4</td></tr>
+            <tr><td>Seguridad</td><td>25%</td><td>3</td></tr>
+            <tr><td>Accesibilidad</td><td>20%</td><td>4</td></tr>
+            <tr><td>SEO</td><td>15%</td><td>2</td></tr>
+            <tr><td>Compatibilidad</td><td>15%</td><td>4</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="resource">
+        <h4>Indicadores de accesibilidad</h4>
+        <ul>
+          <li>Contraste adecuado</li>
+          <li>Textos alternativos (alt)</li>
+          <li>Navegación por teclado</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>Quiz 5.6</h3>
+    <form class="quiz" data-correct='{"q1":"b","q2":"b","q3":"b","q4":"b","q5":"b"}' id="quiz-5-6">
+      <div class="q"><strong>1.</strong> ¿Qué evalúa el rendimiento?<br>
+        <label><input type="radio" name="q1" value="a"> a) Colores</label>
+        <label><input type="radio" name="q1" value="b"> b) Velocidad y carga</label>
+        <label><input type="radio" name="q1" value="c"> c) Tipo de fuente</label>
+        <label><input type="radio" name="q1" value="d"> d) Tamaño del logo</label>
+      </div>
+
+      <div class="q"><strong>2.</strong> ¿Qué heurísticas existen?<br>
+        <label><input type="radio" name="q2" value="a"> a) Adobe</label>
+        <label><input type="radio" name="q2" value="b"> b) Nielsen</label>
+        <label><input type="radio" name="q2" value="c"> c) Tesla</label>
+        <label><input type="radio" name="q2" value="d"> d) Oracle</label>
+      </div>
+
+      <div class="q"><strong>3.</strong> WCAG se relaciona con:<br>
+        <label><input type="radio" name="q3" value="a"> a) Seguridad</label>
+        <label><input type="radio" name="q3" value="b"> b) Accesibilidad</label>
+        <label><input type="radio" name="q3" value="c"> c) Marketing</label>
+        <label><input type="radio" name="q3" value="d"> d) Hosting</label>
+      </div>
+
+      <div class="q"><strong>4.</strong> ¿Qué es una matriz de evaluación?<br>
+        <label><input type="radio" name="q4" value="a"> a) Galería visual</label>
+        <label><input type="radio" name="q4" value="b"> b) Herramienta para asignar puntajes de calidad</label>
+        <label><input type="radio" name="q4" value="c"> c) Registro de usuarios</label>
+        <label><input type="radio" name="q4" value="d"> d) Base de datos</label>
+      </div>
+
+      <div class="q"><strong>5.</strong> El SEO evalúa:<br>
+        <label><input type="radio" name="q5" value="a"> a) Motores gráficos</label>
+        <label><input type="radio" name="q5" value="b"> b) Posicionamiento en buscadores</label>
+        <label><input type="radio" name="q5" value="c"> c) Servidores</label>
+        <label><input type="radio" name="q5" value="d"> d) CSS</label>
+      </div>
+
+      <div style="display:flex; gap:10px; align-items:center">
+        <button type="button" class="btn" onclick="gradeQuiz('quiz-5-6')">Calificar</button>
+        <a class="btn secondary" href="#open-5-6">Responder abiertas / caso</a>
+        <div id="result-quiz-5-6" style="margin-left:auto"></div>
+      </div>
+
+      <div id="open-5-6" style="margin-top:12px">
+        <h4>Preguntas abiertas</h4>
+        <label>1. ¿Cómo influye la accesibilidad en la experiencia del usuario?<textarea name="open1"></textarea></label>
+        <label>2. ¿Qué importancia tiene la compatibilidad entre dispositivos?<textarea name="open2"></textarea></label>
+
+        <h4>Mini-caso</h4>
+        <p><em>"Una web carga rápido pero no es accesible para lectores de pantalla."</em></p>
+        <label>¿Qué criterio falla?<textarea name="case"></textarea></label>
+      </div>
+    </form>
+  </section>
+
+  <!-- 5.7 -->
+  <section id="t57" class="card">
+    <h2>5.7 Mantenimiento de Aplicaciones Web</h2>
+    <p><strong>Resumen:</strong> El mantenimiento modifica y actualiza la aplicación tras su entrega para corregir fallos, mejorar el rendimiento o agregar funcionalidades. Es continuo y requiere procesos de control de incidencias y monitoreo.</p>
+
+    <h3>Contenido principal</h3>
+    <ul>
+      <li><strong>Tipos:</strong> correctivo, preventivo, adaptativo, perfectivo.</li>
+      <li><strong>Estrategias:</strong> logs, monitoreo, actualizaciones, respaldos.</li>
+      <li><strong>Control de incidencias:</strong> tickets, prioridades, SLA.</li>
+      <li><strong>Ejemplos:</strong> actualización de librerías, corrección de bugs, cambios en diseño.</li>
+    </ul>
+
+    <div class="resources">
+      <div class="resource">
+        <h4>Línea de vida del mantenimiento</h4>
+        <svg class="svg-diagram" viewBox="0 0 700 140" xmlns="http://www.w3.org/2000/svg" aria-label="Línea de vida mantenimiento">
+          <rect x="20" y="18" rx="6" ry="6" width="120" height="28" fill="#fff" stroke="#cfe6ff"/><text x="80" y="36" text-anchor="middle" font-size="12" fill="#14324f">Lanzamiento</text>
+          <rect x="160" y="18" rx="6" ry="6" width="160" height="28" fill="#fff" stroke="#cfe6ff"/><text x="240" y="36" text-anchor="middle" font-size="12" fill="#14324f">Detección de problemas</text>
+          <rect x="340" y="18" rx="6" ry="6" width="160" height="28" fill="#fff" stroke="#cfe6ff"/><text x="420" y="36" text-anchor="middle" font-size="12" fill="#14324f">Corrección / Actualización</text>
+          <rect x="520" y="18" rx="6" ry="6" width="120" height="28" fill="#fff" stroke="#cfe6ff"/><text x="580" y="36" text-anchor="middle" font-size="12" fill="#14324f">Nueva versión</text>
+          <line x1="140" y1="32" x2="160" y2="32" stroke="#a6d0ff" stroke-width="2"/>
+          <line x1="320" y1="32" x2="340" y2="32" stroke="#a6d0ff" stroke-width="2"/>
+          <line x1="500" y1="32" x2="520" y2="32" stroke="#a6d0ff" stroke-width="2"/>
+        </svg>
+      </div>
+
+      <div class="resource">
+        <h4>Ejemplo de ticket</h4>
+        <pre style="background:#f8fbff;padding:8px;border-radius:6px;border:1px solid #e6eef8">ID: INC-102
+            Error: No carga el carrito en Firefox
+            Nivel: Alto
+            Responsable: Frontend Dev
+            Estado: En proceso</pre>
+      </div>
+    </div>
+
+    <h3>Quiz 5.7</h3>
+    <form class="quiz" data-correct='{"q1":"d","q2":"b","q3":"b","q4":"b","q5":"c"}' id="quiz-5-7">
+      <div class="q"><strong>1.</strong> ¿Cuál NO es tipo de mantenimiento?<br>
+        <label><input type="radio" name="q1" value="a"> a) Correctivo</label>
+        <label><input type="radio" name="q1" value="b"> b) Adaptativo</label>
+        <label><input type="radio" name="q1" value="c"> c) Perfectivo</label>
+        <label><input type="radio" name="q1" value="d"> d) Monetario</label>
+      </div>
+
+      <div class="q"><strong>2.</strong> El mantenimiento preventivo busca:<br>
+        <label><input type="radio" name="q2" value="a"> a) Cambiar diseño</label>
+        <label><input type="radio" name="q2" value="b"> b) Evitar futuros fallos</label>
+        <label><input type="radio" name="q2" value="c"> c) Crear BD</label>
+        <label><input type="radio" name="q2" value="d"> d) Hacer marketing</label>
+      </div>
+
+      <div class="q"><strong>3.</strong> El mantenimiento correctivo:<br>
+        <label><input type="radio" name="q3" value="a"> a) Mejora la interfaz</label>
+        <label><input type="radio" name="q3" value="b"> b) Repara errores reportados</label>
+        <label><input type="radio" name="q3" value="c"> c) Agrega funciones</label>
+        <label><input type="radio" name="q3" value="d"> d) Optimiza SEO</label>
+      </div>
+
+      <div class="q"><strong>4.</strong> ¿Qué herramienta registra incidencias?<br>
+        <label><input type="radio" name="q4" value="a"> a) Word</label>
+        <label><input type="radio" name="q4" value="b"> b) Jira</label>
+        <label><input type="radio" name="q4" value="c"> c) CorelDraw</label>
+        <label><input type="radio" name="q4" value="d"> d) Excel (no recomendado)</label>
+      </div>
+
+      <div class="q"><strong>5.</strong> Una actualización por cambio de SO es:<br>
+        <label><input type="radio" name="q5" value="a"> a) Preventivo</label>
+        <label><input type="radio" name="q5" value="b"> b) Correctivo</label>
+        <label><input type="radio" name="q5" value="c"> c) Adaptativo</label>
+        <label><input type="radio" name="q5" value="d"> d) Perfectivo</label>
+      </div>
+
+      <div style="display:flex; gap:10px; align-items:center">
+        <button type="button" class="btn" onclick="gradeQuiz('quiz-5-7')">Calificar</button>
+        <a class="btn secondary" href="#open-5-7">Responder abiertas / caso</a>
+        <div id="result-quiz-5-7" style="margin-left:auto"></div>
+      </div>
+
+      <div id="open-5-7" style="margin-top:12px">
+        <h4>Preguntas abiertas</h4>
+        <label>1. ¿Por qué el mantenimiento es un proceso continuo?<textarea name="open1"></textarea></label>
+        <label>2. Explica la diferencia entre mantenimiento adaptativo y perfectivo.<textarea name="open2"></textarea></label>
+
+        <h4>Mini-caso</h4>
+        <p><em>"Tu web deja de funcionar tras una actualización de Chrome."</em></p>
+        <label>¿Qué tipo de mantenimiento se requiere?<textarea name="case"></textarea></label>
+      </div>
+    </form>
+  </section>
+
+  <!-- Final: evaluación general -->
+
+<section class="card" id="eval-final">
+  <h2>Evaluación final del blog</h2>
+  <p class="lead">Responde las preguntas de opción múltiple, desarrolla los análisis y evalúa el caso integrador.</p>
+
+  <!--xd-->
+  <form class="quiz" 
+        data-correct='{
+          "q1":"a","q2":"a","q3":"c","q4":"b","q5":"b",
+          "q6":"a","q7":"a","q8":"b","q9":"b","q10":"b",
+          "q11":"a","q12":"b","q13":"a","q14":"a","q15":"b"
+        }'
+        id="quiz-final">
+
+    <h3>1. Preguntas de opción múltiple (15)</h3>
+
+    <ol>
+
+      <li class="q"><strong></strong> La verificación se enfoca en:
+        <label><input type="radio" name="q1" value="a"> Artefactos internos</label>
+        <label><input type="radio" name="q1" value="b"> Opiniones del usuario</label>
+        <label><input type="radio" name="q1" value="c"> Diseño</label>
+      </li>
+
+      <li class="q"><strong></strong> La validación se orienta a:
+        <label><input type="radio" name="q2" value="a"> Cumplir expectativas del usuario</label>
+        <label><input type="radio" name="q2" value="b"> Revisar código</label>
+        <label><input type="radio" name="q2" value="c"> Rediseñar UI</label>
+      </li>
+
+      <li class="q"><strong></strong> Un walkthrough es:
+        <label><input type="radio" name="q3" value="a"> Una auditoría externa</label>
+        <label><input type="radio" name="q3" value="b"> Una prueba automática</label>
+        <label><input type="radio" name="q3" value="c"> Una explicación paso a paso</label>
+      </li>
+
+      <li class="q"><strong></strong> Una prueba de rendimiento evalúa:
+        <label><input type="radio" name="q4" value="a"> SEO</label>
+        <label><input type="radio" name="q4" value="b"> Velocidad y carga</label>
+        <label><input type="radio" name="q4" value="c"> Diseño</label>
+      </li>
+
+      <li class="q"><strong></strong> WCAG pertenece a:
+        <label><input type="radio" name="q5" value="a"> Seguridad</label>
+        <label><input type="radio" name="q5" value="b"> Accesibilidad</label>
+        <label><input type="radio" name="q5" value="c"> Patrones de diseño</label>
+      </li>
+
+      <li class="q"><strong></strong> Git sirve para:
+        <label><input type="radio" name="q6" value="a"> Control de versiones</label>
+        <label><input type="radio" name="q6" value="b"> Crear gráficos</label>
+        <label><input type="radio" name="q6" value="c"> Hosting</label>
+      </li>
+
+      <li class="q"><strong></strong> La compatibilidad revisa:
+        <label><input type="radio" name="q7" value="a"> Navegadores y dispositivos</label>
+        <label><input type="radio" name="q7" value="b"> Colores</label>
+        <label><input type="radio" name="q7" value="c"> Ancho del servidor</label>
+      </li>
+
+      <li class="q"><strong></strong> Un checklist sirve para:
+        <label><input type="radio" name="q8" value="a"> Elegir plantillas</label>
+        <label><input type="radio" name="q8" value="b"> Guiar inspecciones</label>
+        <label><input type="radio" name="q8" value="c"> Ajustar precios</label>
+      </li>
+
+      <li class="q"><strong></strong> Un caso de prueba contiene:
+        <label><input type="radio" name="q9" value="a"> Colores y logos</label>
+        <label><input type="radio" name="q9" value="b"> Entradas y resultado esperado</label>
+        <label><input type="radio" name="q9" value="c"> Nombre del hosting</label>
+      </li>
+
+      <li class="q"><strong></strong> El mantenimiento correctivo:
+        <label><input type="radio" name="q10" value="a"> Agrega funciones</label>
+        <label><input type="radio" name="q10" value="b"> Repara errores</label>
+        <label><input type="radio" name="q10" value="c"> Aumenta tráfico</label>
+      </li>
+
+      <li class="q"><strong></strong> Una auditoría la realiza:
+        <label><input type="radio" name="q11" value="a"> Un equipo externo</label>
+        <label><input type="radio" name="q11" value="b"> Cualquier usuario</label>
+        <label><input type="radio" name="q11" value="c"> Ventas</label>
+      </li>
+
+      <li class="q"><strong></strong> Una métrica de calidad es:
+        <label><input type="radio" name="q12" value="a"> Color del fondo</label>
+        <label><input type="radio" name="q12" value="b"> Tiempo de carga</label>
+        <label><input type="radio" name="q12" value="c"> Precio del dominio</label>
+      </li>
+
+      <li class="q"><strong></strong> CI/CD significa:
+        <label><input type="radio" name="q13" value="a"> Integración y entrega continua</label>
+        <label><input type="radio" name="q13" value="b"> Diseño creativo</label>
+        <label><input type="radio" name="q13" value="c"> Carga instantánea</label>
+      </li>
+
+      <li class="q"><strong></strong> Una prueba de seguridad:
+        <label><input type="radio" name="q14" value="a"> Busca vulnerabilidades</label>
+        <label><input type="radio" name="q14" value="b"> Mejora estética</label>
+        <label><input type="radio" name="q14" value="c"> Analiza colores</label>
+      </li>
+
+      <li class="q"><strong></strong> La V&V se realiza para:
+        <label><input type="radio" name="q15" value="a"> Decorar el sitio</label>
+        <label><input type="radio" name="q15" value="b"> Garantizar calidad</label>
+        <label><input type="radio" name="q15" value="c"> Aumentar ventas</label>
+      </li>
+
+    </ol>
+
+    <!-- boton -->
+    <div style="display:flex; gap:10px; margin-top:12px; align-items:center">
+      <button type="button" class="btn" onclick="gradeQuiz('quiz-final')">Calificar</button>
+      <div id="result-quiz-final" style="margin-left:auto"></div>
+    </div>
+
+    
+    <!--abiertas-->
+    <h3>2. Preguntas de análisis</h3>
+
+    <div class="preguntas-abiertas">
+      <label>1. ¿Por qué es importante la accesibilidad?<textarea></textarea></label>
+      <label>2. Cómo afecta una mala planificación de V&V?<textarea></textarea></label>
+      <label>3. Relación entre compatibilidad y usabilidad:<textarea></textarea></label>
+      <label>4. Beneficios de CI/CD:<textarea></textarea></label>
+      <label>5. Importancia de evidencias:<textarea></textarea></label>
+    </div>
+
+ 
+    <h3>3. Caso integrador (Auditoría V&V)</h3>
+
+    <div class="mini-caso">
+      <p><strong>Situación:</strong> Una web presenta fallos en carrito, login en Safari y carga lenta. No hay plan ni pruebas documentadas.</p>
+      <p><strong>Actividades:</strong></p>
+      <ul>
+        <li>Identificar fallos de Verificación.</li>
+        <li>Identificar fallos de Validación.</li>
+        <li>Proponer estrategia de pruebas.</li>
+        <li>Definir métricas y entregables.</li>
+      </ul>
+      <textarea placeholder="Escribe tu análisis del caso aquí..."></textarea>
+    </div>
+
+
+    <h3>4. Rúbrica de evaluación</h3>
+
+    <table>
+      <tr>
+        <th>Criterio</th>
+        <th>Excelente</th>
+        <th>Bueno</th>
+        <th>Básico</th>
+        <th>Insuficiente</th>
+      </tr>
+
+      <tr>
+        <td>Respuestas correctas</td>
+        <td>14–15</td>
+        <td>12–13</td>
+        <td>10–11</td>
+        <td>&lt; 10</td>
+      </tr>
+
+      <tr>
+        <td>Análisis crítico</td>
+        <td>Profundo</td>
+        <td>Detallado</td>
+        <td>Superficial</td>
+        <td>Incompleto</td>
+      </tr>
+
+      <tr>
+        <td>Caso integrador</td>
+        <td>Muy completo</td>
+        <td>Adecuado</td>
+        <td>Parcial</td>
+        <td>Insuficiente</td>
+      </tr>
+    </table>
+
+  </form>
+</section>
+
+ <section id="fuentes" class="card"></section>
+  <li><strong>Bibliografía</strong>
+    <ul>
+      <li>Verificación y validación de software. _ AcademiaLab. (s. f.). https://academia-lab.com/enciclopedia/verificacion-y-validacion-de-software/</li>
+      <li>Parra, A. S. (s. f.-b). VERIFICACIÓN y VALIDACION DE APLICACIONES WEB. Scribd. https://es.scribd.com/presentation/529079207/VERIFICACION-Y-VALIDACION-DE-APLICACIONES-WEB</li>
+      <li>colaboradores de Wikipedia. (2025, 5 marzo). Inspección de software. Wikipedia, la Enciclopedia Libre. https://es.wikipedia.org/wiki/Inspecci%C3%B3n_de_software</li>
+      <li>Inspección de software _ AcademiaLab. (s. f.). https://academia-lab.com/enciclopedia/inspeccion-de-software/</li>
+      <li>Hamilton, T. (2024, 13 abril). Pruebas de aplicaciones web: ¿Cómo probar un sitio web? Guru99. https://www.guru99.com/es/web-application-testing.html</li>
+      <li>qué son las pruebas  |  web.dev. (s. f.). web.dev. https://web.dev/learn/testing/get-started/what-testing-is?hl=es-419</li>
+      <li>Ejemplo de casos de prueba para aplicaciones web. (s. f.). https://www.machinet.net/tutorial-es/test-cases-example-for-web-application</li>
+      <li>Ejemplos. (s. f.). https://unidad6tallerdeingenieria.blogspot.com/p/ejemplos.html</li>
+      <li>Ufv, F. S. (2025, 17 noviembre). ¿Qué es la implantación de Aplicaciones Web? Cetys. https://fpsuperiorufv.es/blog/que-es-la-implantacion-de-aplicaciones-web/</li>
+      <li>Superior, E. F. P. (s. f.). ¿En qué consiste la implantación de aplicaciones web? ESIC. https://www.esic.edu/rethink/tecnologia/en-que-consiste-implatacion-aplicaciones-web-c</li>
+      <li>Ortega, C. (2023, 18 agosto). Evaluación de software: Qué es y cómo realizarlo. QuestionPro. https://www.questionpro.com/blog/es/evaluacion-de-software/</li>
+      <li>garcia, C. (2023, 19 octubre). Pruebas de aplicaciones web: estrategias para una experiencia de usuario fluida. AppMaster - Ultimate All-in No-code Platform. https://appmaster.io/es/blog/pruebas-de-aplicaciones-web</li>
+      <li>Mantenimiento de Aplicaciones Web: Guía completa y práctica - Mantenimiento Web Profesional. (s. f.). Mantenimiento Web Profesional. https://mantenimientoweb.pro/blog/mantenimiento-de-aplicaciones-web-guia-completa-y-practica/</li>
+      <li>Mantenimiento de aplicaciones web. (s. f.). https://www.todopedia.online/mantenimiento-aplicaciones-web-42623</li>
+    </ul>
+
+  </li>
+
+
+
+  <footer>
+    <small>Material basado en el material de estudio de la unidad 5: <em>Verificación y Validación de Aplicaciones Web   </em>.   Hecho por Joaquin Yam, Francisco Can y Angel Balam</small>
+  </footer>
+</main>
+
+<script>
+/* Funcionalidad de calificación de quizzes */
+function gradeQuiz(formId){
+  const f = document.getElementById(formId);
+  if(!f) return;
+  const correct = JSON.parse(f.dataset.correct || '{}');
+  let total = 0, hits = 0;
+  for(const k in correct){ total++; const el = f.querySelector('[name="'+k+'"]:checked'); if(el && el.value === correct[k]) hits++; }
+  const resultDiv = document.getElementById('result-'+formId.replace('quiz-','quiz-'));
+  // show result
+  const percent = Math.round((hits/total)*100);
+  const txt = 'Puntuación: ' + hits + ' / ' + total + ' (' + percent + '%)';
+  const node = document.getElementById('result-'+formId);
+  if(node) node.innerHTML = '<div class="result '+(percent>=60?'good':'bad')+'">'+txt+'</div>';
+  // show correct answers under quiz
+  const answerList = document.createElement('div');
+  answerList.style.marginTop='8px';
+  answerList.innerHTML = '<small>Respuestas correctas: ' + Object.keys(correct).map(k=> k.replace('q','')+': '+correct[k]).join(' | ') + '</small>';
+  if(node) node.appendChild(answerList);
+  // scroll to result
+  node && node.scrollIntoView({behavior:'smooth', block:'center'});
+}
+
+/* Crear enlaces de descarga (data URIs) */
+function mkDownloadLink(elementId, filename, content){
+  const el = document.getElementById(elementId);
+  if(!el) return;
+  const uri = 'data:text/plain;charset=utf-8,' + encodeURIComponent(content);
+  el.setAttribute('href', uri);
+  el.setAttribute('download', filename);
+  el.classList.add('download-link');
+}
+
+/* checklist inspección - contenido */
+const checklistInspeccion = [
+  'Checklist de Inspección - WebApp',
+  '1. Contenido: ortografía, gramática, datos correctos',
+  '2. Enlaces: no rotos, apuntan a destino correcto',
+  '3. Formularios: validaciones en cliente y servidor',
+  '4. Navegación: menú, breadcrumbs, mapa del sitio',
+  '5. Interfaz: consistencia, responsive',
+  '6. Seguridad: entradas sanitizadas, HTTPS, políticas',
+  '7. Código: estándares, comentarios mínimos',
+  '8. Accesibilidad: alt en imágenes, navegación con teclado',
+  '9. Performance: tiempos de carga aceptables',
+  '10. Documentación: requisitos y casos de prueba actualizados'
+].join('\\n');
+
+
+/* formato de caso de prueba */
+const caseFormat = [
+  'Formato de Caso de Prueba (TC)',
+  'ID: TC-XXX',
+  'Título: ',
+  'Función / Módulo: ',
+  'Precondiciones: ',
+  'Datos de entrada: ',
+  'Pasos a ejecutar: ',
+  'Resultado esperado: ',
+  'Resultado obtenido: ',
+  'Evidencia (captura/log): ',
+  'Estado: (Pasa / Falla)'
+].join('\\n');
+
+mkDownloadLink('download-caseformat','formato_caso_prueba.txt', caseFormat);
+
+/* enlaces adicionales */
+document.getElementById('download-checklist-inspeccion')?.addEventListener('click', function(e){
+  // default behaviour: link already set
+});
+document.getElementById('download-caseformat')?.addEventListener('click', function(e){
+  // default behaviour
+});
+
+/* Accesibilidad: focus outline visible */
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Tab') document.body.classList.add('kbd');
+});
+
+</script>
+</body>
+</html>
